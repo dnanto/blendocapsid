@@ -2,11 +2,11 @@
 
 [![Blender 3.0.0](https://img.shields.io/badge/blender-3.0.0-%23f4792b.svg)]()
 
-Calculate meshes for icosahedral virus capsids.
+Calculate meshes for icosahedral virus capsids. Citation and info at the [democapsid](https://github.com/dnanto/democapsid) repository.
 
 ## Installation
 
-1. Download [latest version](https://github.com/dnanto/democapsid) of blendocapsid.
+1. Download [latest version](https://github.com/dnanto/blendocapsid) of blendocapsid.
 2. From Blender: Edit > Preferences
 3. Select the 'Add-ons tab' and click 'Install' in the upper right.
 4. Navigate to the zip file and click 'Install Add-on from File'
