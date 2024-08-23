@@ -44,10 +44,8 @@ class CapsidMesh(bpy.types.Operator):
     tol: bpy.props.FloatProperty(name="tol", description="the machine epsilon for numerical methods", default=1E-15, min=0)
 
     def execute(self, context):
-        from blendocapsid.modules.democapsid.democapsid import (calc_ckm,
-                                                                calc_ico,
-                                                                calc_lattice,
-                                                                dextrize)
+        from blendocapsid.modules.pydemocapsid.pydemocapsid import (
+            calc_ckm, calc_ico, calc_lattice, dextrize)
 
         m, a, s, c = self.m, int(self.a), self.s, self.c == "levo"
         ckp = (self.h, self.k, self.H, self.K)
