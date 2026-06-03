@@ -36,9 +36,9 @@ class CapsidMesh(bpy.types.Operator):
     K: bpy.props.IntProperty(name="K", description="the K Caspar-Klug parameter", default=0, min=0)
     a: bpy.props.EnumProperty(name="a", description="the axial symmetry", items=axis_items, default=axis_items[2][3])
     R: bpy.props.FloatProperty(name="R", description="the hexagonal lattice unit circumradius", default=1, min=0)
-    t: bpy.props.EnumProperty(name="t", description="the hexagonal lattice unit tile", items=tile_items, default=tile_items[0][3])
+    L: bpy.props.EnumProperty(name="L", description="the hexagonal lattice unit tile", items=tile_items, default=tile_items[0][3])
     s: bpy.props.FloatProperty(name="s", description="the sphericity value", default=0, min=-1, max=1)
-    c: bpy.props.EnumProperty(name="c", description="the chirality", items=chiral_items, default=chiral_items[0][3])
+    t: bpy.props.EnumProperty(name="t", description="the chirality", items=chiral_items, default=chiral_items[0][3])
     m: bpy.props.EnumProperty(name="mode", description="the render mode", items=mode_items, default=mode_items[0][3])
     iter: bpy.props.IntProperty(name="iter", description="the iteration number for numerical methods", default=100, min=1)
     tol: bpy.props.FloatProperty(name="tol", description="the machine epsilon for numerical methods", default=1E-15, min=0)
@@ -49,16 +49,16 @@ class CapsidMesh(bpy.types.Operator):
                                                                   calc_lattice,
                                                                   dextrize)
 
-        m, a, s, c = self.m, int(self.a), self.s, self.c == "levo"
+        m, a, s, t = self.m, int(self.a), self.s, self.t == "levo"
         ckp = (self.h, self.k, self.H, self.K)
-        lat = calc_lattice(self.t, self.R)
+        lat = calc_lattice(self.L, self.R)
 
         if m == "ico":
             meshes = calc_ico(ckp, lat, a=a, s=s, iter=self.iter, tol=self.tol)
         elif m == "tri":
             meshes = calc_ckm(ckp, lat)
 
-        meshes = meshes if self.c == "levo" else dextrize(meshes)
+        meshes = meshes if t == "levo" else dextrize(meshes)
 
         for i, mesh in enumerate(meshes[1:], start=1):
             collection = bpy.data.collections.new(f"face-{i}")
