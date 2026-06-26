@@ -1,1 +1,1 @@
-pydemocapsid @ git+https://github.com/dnanto/pydemocapsid.git#egg=pydemocapsid
+pydemocapsid @ git+https://github.com/dnanto/pydemocapsid.git@0.0.3
